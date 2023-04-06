@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3.6.0
       - run: |
-          npm clean-install
+          npm install
           npm run build
 
       - uses: cycjimmy/semantic-release-action@v3.4.2
