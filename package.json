@@ -33,9 +33,6 @@
     "db:clean": "cd test/db && docker-compose down --volumes",
     "db:run": "cd test/db && docker-compose up --detach && wait-for-localhost 3000"
   },
-  "dependencies": {
-    "cross-fetch": "^3.1.5"
-  },
   "devDependencies": {
     "@types/jest": "^27.5.1",
     "jest": "^28.1.0",

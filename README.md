@@ -32,16 +32,7 @@ const postgrest = new PostgrestClient(REST_URL)
 
 #### Custom `fetch` implementation
 
-`postgrest-js` uses the [`cross-fetch`](https://www.npmjs.com/package/cross-fetch) library to make HTTP requests, but an alternative `fetch` implementation can be provided as an option. This is most useful in environments where `cross-fetch` is not compatible, for instance Cloudflare Workers:
-
-```js
-import { PostgrestClient } from '@supabase/postgrest-js'
-
-const REST_URL = 'http://localhost:3000'
-const postgrest = new PostgrestClient(REST_URL, {
-  fetch: (...args) => fetch(...args),
-})
-```
+`postgrest-js` uses native `fetch` api to make HTTP requests, but an alternative `fetch` implementation can be provided as an option.
 
 ## License
 
