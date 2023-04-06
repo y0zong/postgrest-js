@@ -24,9 +24,7 @@ jobs:
           npm clean-install
           npm run build
 
-      - uses: cycjimmy/semantic-release-action@v2
-        with:
-          semantic_version: 17
+      - uses: cycjimmy/semantic-release-action@v3.4.2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

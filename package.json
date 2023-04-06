@@ -1,13 +1,12 @@
 {
-  "name": "@supabase/postgrest-js",
+  "name": "@miuiu/postgrest",
   "version": "0.0.0-automated",
   "description": "Isomorphic PostgREST client",
   "keywords": [
-    "postgrest",
-    "supabase"
+    "postgrest"
   ],
-  "homepage": "https://github.com/supabase/postgrest-js",
-  "bugs": "https://github.com/supabase/postgrest-js/issues",
+  "homepage": "https://github.com/y0zong/postgrest-js",
+  "bugs": "https://github.com/y0zong/postgrest-js/issues",
   "license": "MIT",
   "author": "Supabase",
   "files": [
@@ -17,7 +16,7 @@
   "main": "dist/main/index.js",
   "module": "dist/module/index.js",
   "types": "dist/module/index.d.ts",
-  "repository": "supabase/postgrest-js",
+  "repository": "y0zong/postgrest-js",
   "scripts": {
     "clean": "rimraf dist docs/v2",
     "format": "prettier --write \"{src,test}/**/*.ts\"",
