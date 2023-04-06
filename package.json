@@ -11,6 +11,7 @@
 	"main": "dist/main/index.js",
 	"module": "dist/module/index.js",
 	"types": "dist/module/index.d.ts",
+  "access": "public",
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:y0zong/postgrest-js.git"
