@@ -13,7 +13,7 @@ Full documentation can be found [here](https://supabase.github.io/postgrest-js/v
 Install
 
 ```bash
-npm install @supabase/postgrest-js
+npm install @miuiu/postgrest
 ```
 
 Usage
