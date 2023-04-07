@@ -17,16 +17,14 @@ import { Fetch, GenericSchema } from './types'
 export default class PostgrestClient<
   Database = any,
   SchemaName extends string & keyof Database = 'public' extends keyof Database
-    ? 'public'
-    : string & keyof Database,
+  ? 'public'
+  : string & keyof Database,
   Schema extends GenericSchema = Database[SchemaName] extends GenericSchema
-    ? Database[SchemaName]
-    : any
+  ? Database[SchemaName]
+  : any
 > {
   url: string
   headers: Record<string, string>
-  schema?: SchemaName
-  fetch?: Fetch
 
   // TODO: Add back shouldThrowOnError once we figure out the typings
   /**
@@ -35,25 +33,17 @@ export default class PostgrestClient<
    * @param url - URL of the PostgREST endpoint
    * @param options - Named parameters
    * @param options.headers - Custom headers
-   * @param options.schema - Postgres schema to switch to
-   * @param options.fetch - Custom fetch
    */
   constructor(
     url: string,
     {
       headers = {},
-      schema,
-      fetch,
     }: {
       headers?: Record<string, string>
-      schema?: SchemaName
-      fetch?: Fetch
     } = {}
   ) {
     this.url = url
     this.headers = { ...DEFAULT_HEADERS, ...headers }
-    this.schema = schema
-    this.fetch = fetch
   }
 
   from<
@@ -70,11 +60,15 @@ export default class PostgrestClient<
    * @param relation - The table or view name to query
    */
   from(relation: string): PostgrestQueryBuilder<Schema, any> {
-    const url = new URL(`${this.url}/${relation}`)
+    let [schema, table] = relation.split(".")
+    if (!table) {
+      schema = 'public'
+      table = schema
+    }
+    const url = new URL(`${this.url}/${table}`)
     return new PostgrestQueryBuilder<Schema, any>(url, {
       headers: { ...this.headers },
-      schema: this.schema,
-      fetch: this.fetch,
+      schema,
     })
   }
 
@@ -115,14 +109,19 @@ export default class PostgrestClient<
   ): PostgrestFilterBuilder<
     Schema,
     Function_['Returns'] extends any[]
-      ? Function_['Returns'][number] extends Record<string, unknown>
-        ? Function_['Returns'][number]
-        : never
-      : never,
+    ? Function_['Returns'][number] extends Record<string, unknown>
+    ? Function_['Returns'][number]
+    : never
+    : never,
     Function_['Returns']
   > {
     let method: 'HEAD' | 'POST'
-    const url = new URL(`${this.url}/rpc/${fn}`)
+    let [schema, fnname] = fn.split(".")
+    if (!fnname) {
+      schema = 'public'
+      fnname = schema
+    }
+    const url = new URL(`${this.url}/rpc/${fnname}`)
     let body: unknown | undefined
     if (head) {
       method = 'HEAD'
@@ -143,9 +142,8 @@ export default class PostgrestClient<
       method,
       url,
       headers,
-      schema: this.schema,
+      schema,
       body,
-      fetch: this.fetch,
       allowEmpty: false,
     } as unknown as PostgrestBuilder<Function_['Returns']>)
   }

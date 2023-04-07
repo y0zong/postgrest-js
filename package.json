@@ -1,13 +1,18 @@
 {
 	"name": "@miuiu/postgrest",
-	"version": "0.0.0-automated",
+	"version": "0.0.0-automate",
 	"description": "Isomorphic PostgREST client",
-	"keywords": ["postgrest"],
+	"keywords": [
+		"postgrest"
+	],
 	"homepage": "https://github.com/y0zong/postgrest-js",
 	"bugs": "https://github.com/y0zong/postgrest-js/issues",
 	"license": "MIT",
 	"author": "Supabase",
-	"files": ["dist", "src"],
+	"files": [
+		"dist",
+		"src"
+	],
 	"main": "dist/main/index.js",
 	"module": "dist/module/index.js",
 	"types": "dist/module/index.d.ts",
@@ -17,7 +22,7 @@
 	},
 	"scripts": {
 		"clean": "rimraf dist docs/v2",
-		"format": "prettier --write \"{src,test}/**/*.ts\"",
+		"format": "rome format --write \"{src,test}/**/*.ts\"",
 		"build": "run-s clean format build:*",
 		"build:main": "tsc -p tsconfig.json",
 		"build:module": "tsc -p tsconfig.module.json",
@@ -35,8 +40,8 @@
 		"jest": "^28.1.0",
 		"node-abort-controller": "^3.0.1",
 		"npm-run-all": "^4.1.5",
-		"prettier": "^2.6.2",
 		"rimraf": "^3.0.2",
+		"rome": "^12.0.0",
 		"semantic-release-plugin-update-version-in-files": "^1.1.0",
 		"ts-jest": "^28.0.3",
 		"tsd": "^0.24.1",
@@ -44,8 +49,8 @@
 		"typescript": "~4.7",
 		"wait-for-localhost-cli": "^3.0.0"
 	},
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  }
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	}
 }

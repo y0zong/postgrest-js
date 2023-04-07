@@ -10,7 +10,7 @@ export default abstract class PostgrestBuilder<Result>
   protected body?: unknown
   protected shouldThrowOnError = false
   protected signal?: AbortSignal
-  protected fetch: Fetch
+  protected fetch: Fetch = fetch
   protected allowEmpty: boolean
 
   constructor(builder: PostgrestBuilder<Result>) {
@@ -22,12 +22,6 @@ export default abstract class PostgrestBuilder<Result>
     this.shouldThrowOnError = builder.shouldThrowOnError
     this.signal = builder.signal
     this.allowEmpty = builder.allowEmpty
-
-    if (builder.fetch) {
-      this.fetch = builder.fetch
-    } else {
-      this.fetch = fetch
-    }
   }
 
   /**
@@ -83,8 +77,7 @@ export default abstract class PostgrestBuilder<Result>
           } else if (this.headers['Accept'] === 'text/csv') {
             data = body
           } else if (
-            this.headers['Accept'] &&
-            this.headers['Accept'].includes('application/vnd.pgrst.plan+text')
+            this.headers['Accept']?.includes('application/vnd.pgrst.plan+text')
           ) {
             data = body
           } else {
