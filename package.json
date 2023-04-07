@@ -1,6 +1,6 @@
 {
 	"name": "@miuiu/postgrest",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Isomorphic PostgREST client",
 	"keywords": [
 		"postgrest"
